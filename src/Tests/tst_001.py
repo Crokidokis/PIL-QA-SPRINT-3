@@ -1,3 +1,6 @@
+from Functions.Functions import Functions as Selenium #Importamos la función Functions y le ponemos el alias Selenium
+from Pages.Samsung_carrito import Carrito as Samsung
+import selenium
 import unittest
 import time
 from selenium import webdriver
@@ -15,7 +18,6 @@ from selenium.webdriver.chrome.service import Service
 import msvcrt
 
 options = webdriver.ChromeOptions()
-
 #Templates
 # Buscar un elemento por XPATH
 # elemento = self.driver.find_element(By.XPATH, ' ')
@@ -104,19 +106,21 @@ class Test_001(unittest.TestCase):
         
         self.driver.implicitly_wait(5)
         
-        search_bar = self.driver.find_element(By.XPATH, '//*[@id="downshift-0-input"]')
+        txt_search = self.driver.find_element(By.XPATH, '//*[@id="downshift-0-input"]')
         
-        search_bar.click()  
+        txt_search.click()  
         
-        search_bar.clear()
+        txt_search.clear()
         
-        search_bar.send_keys('55" Crystal UHD 4K CU7000')
+        txt_search.send_keys('55" Crystal UHD 4K CU7000')
         
         time.sleep(2)
         
         self.driver.implicitly_wait(5)
         
         wait.until(EC.visibility_of_element_located((By.XPATH, '//*[@id="hyper-modal-wrapper_component_id"]/div[2]/div[1]/div[1]/div/div/div[3]/section/section/ul/li[1]/div/a/article')))
+        
+        time.sleep(3)
         
         article = self.driver.find_element(By.XPATH, '//*[@id="hyper-modal-wrapper_component_id"]/div[2]/div[1]/div[1]/div/div/div[3]/section/section/ul/li[1]/div/a/article') 
         
@@ -146,6 +150,8 @@ class Test_001(unittest.TestCase):
         
         wait.until(EC.visibility_of_element_located((By.XPATH, '//*[@id="checkoutMainContainer"]/div[5]/div[3]/div[1]/div[2]/div/div[4]/div[2]/div/div[2]/div/table/tfoot/tr/td[3]')))
 
+        time.sleep(3)
+        
         btn_choose_more_products = self.driver.find_element(By.XPATH, '//*[@id="cart-choose-more-products"]')  
         
         btn_choose_more_products.click()
@@ -162,19 +168,21 @@ class Test_001(unittest.TestCase):
         
         self.driver.implicitly_wait(5)
         
-        search_bar2 = self.driver.find_element(By.XPATH, '//*[@id="downshift-0-input"]') 
+        txt_search2 = self.driver.find_element(By.XPATH, '//*[@id="downshift-0-input"]') 
         
-        search_bar2.click()  
+        txt_search2.click()  
         
-        search_bar2.clear()
+        txt_search2.clear()
         
-        search_bar2.send_keys('Galaxy Z Fold5')
+        txt_search2.send_keys('Galaxy Z Fold5')
         
         time.sleep(2)
         
         self.driver.implicitly_wait(5)
         
         wait.until(EC.visibility_of_element_located((By.XPATH, '//*[@id="hyper-modal-wrapper_component_id"]/div[2]/div[1]/div[1]/div/div/div[3]/section/section/ul/li/div/a/article/div[2]/div[1]/span')))
+        
+        time.sleep(3)
         
         article_2 = self.driver.find_element(By.XPATH, '//*[@id="hyper-modal-wrapper_component_id"]/div[2]/div[1]/div[1]/div/div/div[3]/section/section/ul/li/div/a/article/div[2]/div[1]/span') 
         
@@ -202,13 +210,16 @@ class Test_001(unittest.TestCase):
         
         self.driver.implicitly_wait(5)
         
-        btn_purchase = self.driver.find_element(By.XPATH, '//*[@id="cart-to-orderform"]') 
+        btn_orderform = self.driver.find_element(By.XPATH, '//*[@id="cart-to-orderform"]') 
         
-        btn_purchase.click()
+        btn_orderform.click()
+        
+        time.sleep(5)
+        
+        self.driver.implicitly_wait(5)
         
     def tearDown(self):
-        msvcrt.getch()
-    
+        self.driver.close()
         
 if __name__ == "__main__":
     #import sys;sys.argv = ['', 'Test.testName']
