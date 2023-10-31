@@ -31,7 +31,7 @@ from Pages.WebElements_Menu import Shop as elements
 # self.driver.execute_script("arguments[0].scrollIntoView();", elemento)
 
 
-class Test_002(unittest.TestCase):
+class Test_003(unittest.TestCase):
     def setUp(self):
         self.driver = webdriver.Chrome()  #Abrir Chrome
         self.action = ActionChains(self.driver)
@@ -45,7 +45,7 @@ class Test_002(unittest.TestCase):
         
         options.add_argument('--disable-infobars') 
 
-    def testcase_02(self):
+    def testcase_03(self):
         btn_login = self.driver.find_element(By.XPATH, elements.btn_login_xpath)
 
         btn_login.click()

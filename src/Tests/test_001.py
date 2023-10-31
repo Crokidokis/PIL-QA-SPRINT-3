@@ -19,7 +19,7 @@ from selenium.common.exceptions import NoSuchWindowException
 from selenium.common.exceptions import TimeoutException
 from selenium.webdriver.chrome.service import Service
 import msvcrt
-from Pages.Samsung_carrito import Shop as elements
+from Pages.WebElements_Menu import Shop as elements
 #Templates
 # Buscar un elemento por XPATH
 # elemento = self.driver.find_element(By.XPATH, ' ')
@@ -215,7 +215,7 @@ class Test_001(unittest.TestCase):
         time.sleep(5)
         
         self.driver.implicitly_wait(5)
-        
+
     def tearDown(self):
         self.driver.close()
         
