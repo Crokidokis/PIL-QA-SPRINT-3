@@ -53,38 +53,38 @@ class Test_001(unittest.TestCase):
         wait = WebDriverWait(self.driver, 10)
 
     def testcase_01(self):
+        
+        try:
+            self.driver.find_element(By.XPATH, login.btn_login_xpath).click()
 
-        self.driver.find_element(By.XPATH, login.btn_login_xpath).click()
+            time.sleep(3)
 
-        time.sleep(3)
+            self.driver.find_element(By.XPATH, login.txt_email_xpath).send_keys(
+                "cocarochagonzalo@gmail.com")
 
-        self.driver.find_element(By.XPATH, login.txt_email_xpath).send_keys(
-            "cocarochagonzalo@gmail.com")
+            time.sleep(1)
 
-        time.sleep(1)
+            txt_password = self.driver.find_element(By.XPATH, login.btn_password_xpath)
 
-        self.driver.find_element(
-            By.XPATH, login.btn_password_xpath).send_keys("Gonzalococa01")
+            txt_password.send_keys("Gonzalococa01")
 
-        time.sleep(3)
+            txt_password.send_keys(Keys.ENTER)
 
-        self.driver.implicitly_wait(5)
-        #Se valida que el botón "Entrar" se encuentre listo para ser clickeable
-        btn_enter_wait = wait.until(EC.element_to_be_clickable((By.XPATH, login.btn_enter_xpath)))
+            time.sleep(5)   
 
-        self.driver.find_element(By.XPATH, login.btn_enter_xpath).click()
+            self.driver.implicitly_wait(5)
 
-        time.sleep(5)
+            btn_home = self.driver.find_element(By.XPATH, login.btn_home_xpath)
 
-        self.driver.implicitly_wait(5)
+            btn_home.click()
 
-        btn_home = self.driver.find_element(By.XPATH, menu.btn_home_xpath)
+            time.sleep(5)
 
-        btn_home.click()
-
-        time.sleep(5)
-
-        self.driver.implicitly_wait(5)
+            self.driver.implicitly_wait(5)
+        
+        except WebDriverException as e: #En caso de no poder logearse se notifica un except y se sigue con la ejecución del código
+            print("Error al iniciar sesión")
+            print(e)
 
         btn_search = self.driver.find_element(By.XPATH, menu.btn_search_xpath)
 

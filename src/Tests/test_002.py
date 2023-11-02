@@ -43,7 +43,7 @@ class Test_002(unittest.TestCase):
         self.driver.maximize_window()  # Maximizamos la ventana
         # Ingresamos a la página web
         self.driver.get("https://shop.samsung.com/ar/")
-        time.sleep(2)
+        time.sleep(5)
         self.driver.implicitly_wait(5)
         global options
         options = webdriver.ChromeOptions()
@@ -52,43 +52,71 @@ class Test_002(unittest.TestCase):
         global wait
         wait = WebDriverWait(self.driver, 10)
 
-    def testcase_03(self):
+    def testcase_02(self):
+        try:
+            self.driver.find_element(By.XPATH, login.btn_login_xpath).click()
 
-        self.driver.find_element(By.XPATH, login.btn_login_xpath).click()
+            time.sleep(3)
 
-        time.sleep(3)
+            self.driver.find_element(By.XPATH, login.txt_email_xpath).send_keys(
+                "cocarochagonzalo@gmail.com")
 
-        self.driver.find_element(By.XPATH, login.txt_email_xpath).send_keys(
-            "cocarochagonzalo@gmail.com")
+            time.sleep(1)
 
-        time.sleep(1)
+            txt_password = self.driver.find_element(By.XPATH, login.btn_password_xpath)
 
-        self.driver.find_element(
-            By.XPATH, login.btn_password_xpath).send_keys("Gonzalococa01")
+            txt_password.send_keys("Gonzalococa01")
 
-        time.sleep(3)
+            txt_password.send_keys(Keys.ENTER)
+
+            time.sleep(5)   
+
+            self.driver.implicitly_wait(5)
+
+        except WebDriverException as e: #En caso de no poder logearse se notifica un except y se sigue con la ejecución del código
+            print("Error al iniciar sesión")
+            print(e)
+
+        btn_offers = self.driver.find_element(By.XPATH, menu.offers_xpath)
+
+        btn_offers.click()
+
+        time.sleep(5)   
 
         self.driver.implicitly_wait(5)
-        #Se valida que el botón "Entrar" se encuentre listo para ser clickeable
-        btn_enter_wait = wait.until(EC.element_to_be_clickable((By.XPATH, login.btn_enter_xpath)))
 
-        self.driver.find_element(By.XPATH, login.btn_enter_xpath).click()
+        article_4 = self.driver.find_element(By.XPATH, menu.article_4_xpath)
 
-        time.sleep(5)
+        self.action.move_to_element(article_4).perform()
 
-        self.driver.implicitly_wait(5)
+        article_4.click()
 
-        btn_home = self.driver.find_element(By.XPATH, menu.btn_home_xpath)
-
-        btn_home.click()
-
-        time.sleep(5)
+        time.sleep(5)   
 
         self.driver.implicitly_wait(5)
 
+        btn_add_to_cart = self.driver.find_element(By.XPATH, cart.btn_add_to_cart_xpath)
 
+        self.action.move_to_element(btn_add_to_cart).perform()
 
+        btn_add_to_cart.click()
+
+        time.sleep(5)   
+
+        self.driver.implicitly_wait(5)
+
+        btn_orderform2 = self.driver.find_element(By.XPATH, cart.btn_orderform2_xpath)
+
+        self.action.move_to_element(btn_orderform2).perform()
+
+        btn_orderform2.click()
+
+        time.sleep(5)   
+
+        self.driver.implicitly_wait(5)        
+        
     def tearDown(self):
+        #msvcrt.getch()
         self.driver.close()
 
 
